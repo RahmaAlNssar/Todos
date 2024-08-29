@@ -80,8 +80,6 @@ class ApiController extends Controller
         try {
             $apiUrl ='https://dummyjson.com/todos/'.$id;
             $client = new Client();
-           
-
             // POST request using the created object
             $postResponse = $client->delete($apiUrl);
             $data = json_decode($postResponse->getBody(), true);
