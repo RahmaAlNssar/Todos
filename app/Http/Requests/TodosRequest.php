@@ -25,6 +25,7 @@ class TodosRequest extends FormRequest
             return [
                 'todo' => 'required|string',
                 'completed' => 'required',
+                'userId'=>'required|integer'
             ];
         }
         if (request()->route()->getActionMethod() == 'update') {
