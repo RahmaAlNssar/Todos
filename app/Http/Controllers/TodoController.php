@@ -35,7 +35,7 @@ class TodoController extends Controller
     {
         // POST request using the created object
         $postResponse =Http::post($this->apiUrl.'/add', 
-            $request->input()
+            $request->validated()
         );
         $data = $postResponse->json();
         return $this->returnData($data, true, 200);
@@ -45,7 +45,7 @@ class TodoController extends Controller
     public function update(TodosRequest $request, $id)
     {
         $postResponse = Http::put($this->apiUrl.'/'.$id, 
-            $request->input()
+            $request->validated()
         );
         $data = $postResponse->json();
         return $this->returnData($data, true, 200);

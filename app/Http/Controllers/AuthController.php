@@ -18,13 +18,13 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $requset)
     {
-        $user = User::create($requset->input());
+        $user = User::create($requset->validated());
         return $this->returnSuccess('register success',201);
     }
 
     public function login(LoginRequest $requset)
     {
-        if (!$token = auth('api')->attempt($requset->input())) {
+        if (!$token = auth('api')->attempt($requset->validated())) {
             return $this->returnError('Unauthenticated',401);
         }
         return $this->respondWithToken($token);
