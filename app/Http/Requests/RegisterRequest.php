@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class TodosRequest extends FormRequest
+class RegisterRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,17 +21,10 @@ class TodosRequest extends FormRequest
      */
     public function rules(): array
     {
-        if (request()->route()->getActionMethod() == 'store') {
-            return [
-                'todo' => 'required|string',
-                'completed' => 'required',
-            ];
-        }
-        if (request()->route()->getActionMethod() == 'update') {
-            return [
-                'completed' => 'required',
-
-            ];
-        }
+        return [
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|confirmed|min:8',
+        ];
     }
 }

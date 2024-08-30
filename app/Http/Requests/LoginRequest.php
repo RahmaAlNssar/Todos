@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,19 +21,9 @@ class UserRequest extends FormRequest
      */
     public function rules(): array
     {
-        if (request()->route()->getActionMethod() == 'regsiter') {
         return [
-            'name' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|confirmed|min:8',
+            'email' => 'required|exists:users,email',
+            'password' => 'required',
         ];
-         }
-         if (request()->route()->getActionMethod() == 'login') {
-            return [
-               
-                'email' => 'required|exists:users,email',
-                'password' => 'required',
-            ];
-        }
     }
 }
